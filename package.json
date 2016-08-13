@@ -1,0 +1,16 @@
+{
+  "name": "url-shorten-test",
+  "version": "0.0.1",
+  "description": "URL shorten built with hapi.js",
+  "main": "shorturl.js",
+  "script": {
+    "start": "node shorturl.js"
+  },
+  "dependencies": {
+    "dustjs-linkedin": "^2.7.3",
+    "hapi": "^14.1.0",
+    "inert": "^4.0.1",
+    "joi": "^9.0.4",
+    "mongoose": "^4.5.8"
+  }
+}
