@@ -43,7 +43,7 @@ module.exports = [{
   handler(request, reply) {
     const uniqueID = createHash(hashLen);
     const newRedir = new Redir({
-      shortUrl: '${baseUrl}/${uniqueID}',
+      shortUrl: `${baseUrl}/${uniqueID}`,
       url: request.payload.url,
       create_at: new Date()
     });
@@ -73,13 +73,13 @@ module.exports = [{
   method: 'GET',
   path: '/css/{file}',
   handler(request, reply) {
-    reply.file('public/css' + request.params.file);
+    reply.file('public/css/' + request.params.file);
   }
 }, {
   method: 'GET',
   path: '/js/{file}',
   handler(request, reply) {
-    reply.file('public/js' + request.params.file);
+    reply.file('public/js/' + request.params.file);
   }
 }];
 

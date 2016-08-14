@@ -14,29 +14,12 @@
   </head>
   <body>
     <header>
-      <nav>
-        <div class="container">
-          <div class="row">
-            <div class="column"><h1 class="logo">Shortio</h1></div>
-            <div class="column social">
-              <a href="http://codetuts.tech/">
-                <i class="fa fa-rss"></i>
-              </a>
-              <a href="https://github.com/luishendrix92/shortio">
-                <i class="fa fa-github"></i>
-              </a>
-            </div>
-          </div>
-        </div>
-      </nav>
-
       <div class="container">
         <div class="row desc">
             <p>Simple, hassle-less URL shortener for your big hyperlinks! Save space and share content in a good way with Shortio, give it a try.<p>
         </div>
       </div>
     </header>
-
     <main>
       <div class="container">
           <form id="shorten-form" method="POST">
@@ -46,7 +29,6 @@
             </div>
             <input type="submit" value="Shorten!">
           </form>
-
           <div class="row">
             <div class="column">
               <section id="shortened">
