@@ -41,29 +41,29 @@ module.exports = [{
 }, {
   method: 'POST',
   path: '/new',
-   handler(request, reply) {
-    const uniqueID = createHash(hashLen);
-    const newRedir = new Redir({
-      shortUrl: `${baseUrl}/${uniqueID}`,
-      url: request.payload.url,
-      createdAt: new Date()
-    });
-    newRedir.save((err, redir) => {
-      if (err) {
-        reply(err);
-      } else {
-        reply(redir);
-      }
-    });
-  },
   config: {
+    handler(request, reply) {
+      const uniqueID = createHash(hashLen);
+      const newRedir = new Redir({
+        shortUrl: `${baseUrl}/${uniqueID}`,
+        url: request.payload.url,
+        createdAt: new Date()
+      });
+      newRedir.save((err, redir) => {
+        if (err) {
+          reply(err);
+        } else {
+          reply(redir);
+        }
+      });
+    },
     validate: {
       payload: {
-        url: 'http://mashable.com/2016/08/13/lesbian-gay-bisexual-high-school-violence-study/#H358xzYxNEqz'
-        //Joi.string().regex(urlPattern).required()
+        //url: 'http://mashable.com/2016/08/13/lesbian-gay-bisexual-high-school-violence-study/#H358xzYxNEqz'
+        url: Joi.string().regex(urlPattern).required()
       }
-   }
- }
+    }
+  }
 }, {
   method: 'GET',
   path: '/',
