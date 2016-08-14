@@ -8,6 +8,10 @@ const router = require('./router');
 const mongoose = require('mongoose');
 const mongoUri = process.env.MONGOURI || 'mongodb://localhost/shortio';
 
+// Use native promises
+// Fixing mongoDB promise deprecate issue
+mongoose.Promise = global.Promise;
+
 //Monogo connection options
 const options = {
   server: {

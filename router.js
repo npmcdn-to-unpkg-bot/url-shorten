@@ -9,6 +9,10 @@ const hashLen = 8;
 const baseUrl = process.env.BASE_URL || 'http://my-domain.com';
 const urlPattern = /^https|http?:\/\/([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
 
+// Use native promises
+// Fixing mongoDB promise deprecate issue
+mongoose.Promise = global.Promise;
+
 //Mongo schema
 const redirSchema = new Schema({
   shortUrl: String,
