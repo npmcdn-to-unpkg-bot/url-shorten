@@ -9,6 +9,8 @@
   "dependencies": {
     "dustjs-helpers": "^1.7.3",
     "dustjs-linkedin": "^2.7.3",
+    "good": "^7.0.1",
+    "good-console": "^6.1.2",
     "hapi": "^14.1.0",
     "hapi-dust": "^2.0.0",
     "inert": "^4.0.1",

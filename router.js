@@ -25,7 +25,7 @@ module.exports = [{
   path: '/{hash}',
   handler(request, reply) {
     const query = {
-      'shortUrl': '${baseUrl}/${request.params.hash}'
+      'shortUrl': `${baseUrl}/${request.params.hash}`
     };
     Redir.findOne(query, (err, redir) => {
       if (err) {
@@ -33,7 +33,7 @@ module.exports = [{
       } else if (redir) {
         reply().redirect(redir.url);
       } else {
-        reply.fil('views/404').code(404);
+        reply.view('404').code(404);
       }
     });
   }
@@ -67,13 +67,19 @@ module.exports = [{
   method: 'GET',
   path: '/',
   handler(request, reply) {
-    reply.file('view/index');
+    reply.view('index');
   }
 }, {
   method: 'GET',
-  path: '/public/{file}',
+  path: '/css/{file}',
   handler(request, reply) {
-    reply.file('public/' + request.params.file);
+    reply.file('public/css' + request.params.file);
+  }
+}, {
+  method: 'GET',
+  path: '/js/{file}',
+  handler(request, reply) {
+    reply.file('public/js' + request.params.file);
   }
 }];
 

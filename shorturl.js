@@ -2,6 +2,7 @@
 
 const Hapi = require('hapi');
 const Path = require('path');
+const Good = require('good');
 const server = new Hapi.Server(); //Initiate hapi server, MUST use new()!!!
 const router = require('./router');
 const mongoose = require('mongoose');
@@ -29,7 +30,26 @@ server.connection({
   }
 });
 
-server.register(require('vision'), (err) => {
+server.register([
+  // {
+  //   register: Good,
+  //   options: {
+  //     reporters: [{
+  //       reporter: require('good-console'),
+  //       events:{
+  //         response: '*',
+  //         log: '*'
+  //       }
+  //     }]
+  //   }
+  // },
+  {
+    register: require('vision')
+  },
+  {
+    register: require('inert')
+  }
+], (err) => {
   server.views({
     engines: {
       dust: require('hapi-dust')
