@@ -75,5 +75,5 @@ module.exports = [{
   handler(request, reply) {
     reply.file('public/' + request.params.file);
   }
-}]
+}];
 

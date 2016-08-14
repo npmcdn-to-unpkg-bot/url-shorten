@@ -22,7 +22,6 @@ const db = mongoose.connection;
 
 /************************************************************/
 //Hapi server initialize
-
 server.connection({
   port: process.env.PORT || 3000,
   routes: {
@@ -30,16 +29,17 @@ server.connection({
   }
 });
 
+server.register(require('vision'), (err) => {
+  server.views({
+    engines: {
+      dust: require('hapi-dust')
+    },
+    relativeTo: Path.join(__dirname),
+    path: 'views/'
+    // partialsPath: 'path/to/partials',
+    // helpersPath: 'path/to/helpers',
+  });
 
-server.views({
-  engines: { dust: require('hapi-dust') },
-  relativeTo: Path.join(__dirname),
-  path: 'views/'
-  // partialsPath: 'path/to/partials',
-  // helpersPath: 'path/to/helpers',
-});
-
-server.register(require('inert'), (err) => {
   db.on('error', console.error.bind(console, 'connection error:'))
     .once('open', () => {
       server.route(router);
@@ -47,7 +47,7 @@ server.register(require('inert'), (err) => {
         if (err) {
           throw err;
         }
-        console.log('Server is runnig at port ${server.info.port}');
+        console.log(`Server is running at port ${server.info.port}`);
       });
     });
 });
