@@ -1,8 +1,11 @@
+'use strict';
+
 const Hapi = require('hapi');
-const server = Hapi.Server();
+const Path = require('path');
+const server = new Hapi.Server(); //Initiate hapi server, MUST use new()!!!
 const router = require('./router');
 const mongoose = require('mongoose');
-const mongoUri = process.env.MONGOURI || 'mongo://localhost/shortio';
+const mongoUri = process.env.MONGOURI || 'mongodb://localhost/shortio';
 
 //Monogo connection options
 const options = {
@@ -16,3 +19,35 @@ const options = {
 
 mongoose.connect(mongoUri, options);
 const db = mongoose.connection;
+
+/************************************************************/
+//Hapi server initialize
+
+server.connection({
+  port: process.env.PORT || 3000,
+  routes: {
+    cors: true
+  }
+});
+
+
+server.views({
+  engines: { dust: require('hapi-dust') },
+  relativeTo: Path.join(__dirname),
+  path: 'views/'
+  // partialsPath: 'path/to/partials',
+  // helpersPath: 'path/to/helpers',
+});
+
+server.register(require('inert'), (err) => {
+  db.on('error', console.error.bind(console, 'connection error:'))
+    .once('open', () => {
+      server.route(router);
+      server.start(err => {
+        if (err) {
+          throw err;
+        }
+        console.log('Server is runnig at port ${server.info.port}');
+      });
+    });
+});
