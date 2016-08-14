@@ -6,6 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.1.0/milligram.min.css">
@@ -16,7 +17,7 @@
     <header>
       <div class="container">
         <div class="row desc">
-            <p>Simple, hassle-less URL shortener for your big hyperlinks! Save space and share content in a good way with Shortio, give it a try.<p>
+            <p>Shorten URL<p>
         </div>
       </div>
     </header>

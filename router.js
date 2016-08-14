@@ -83,5 +83,14 @@ module.exports = [{
   handler(request, reply) {
     reply.file('public/js/' + request.params.file);
   }
+}, {
+  method: 'GET',
+  path: '/favicon.ico',
+  handler(request, reply) {
+    return reply.file('public/images/favicon.ico');
+  },
+  config: {
+    auth: false
+  }
 }];
 
