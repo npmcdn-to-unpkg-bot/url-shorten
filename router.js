@@ -6,8 +6,8 @@ const Schema = mongoose.Schema;
 const createHash = require('./createHash');
 const hashLen = 8;
 
-const baseUrl = process.env.BASE_URL || 'http://localhost:3000/';
-const urlPattern = /^https?:\/\/([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
+const baseUrl = process.env.BASE_URL || 'http://my-domain.com';
+const urlPattern = /^https|http?:\/\/([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
 
 //Mongo schema
 const redirSchema = new Schema({
@@ -18,6 +18,7 @@ const redirSchema = new Schema({
 
 const Redir = mongoose.model('Redir', redirSchema);
 
+//console.log(Redir);
 //Handling routing
 
 module.exports = [{
@@ -40,14 +41,13 @@ module.exports = [{
 }, {
   method: 'POST',
   path: '/new',
-  handler(request, reply) {
+   handler(request, reply) {
     const uniqueID = createHash(hashLen);
     const newRedir = new Redir({
       shortUrl: `${baseUrl}/${uniqueID}`,
       url: request.payload.url,
-      create_at: new Date()
+      createdAt: new Date()
     });
-
     newRedir.save((err, redir) => {
       if (err) {
         reply(err);
@@ -59,14 +59,16 @@ module.exports = [{
   config: {
     validate: {
       payload: {
-        url: Joi.string().regex(urlPattern).required()
+        url: 'http://mashable.com/2016/08/13/lesbian-gay-bisexual-high-school-violence-study/#H358xzYxNEqz'
+        //Joi.string().regex(urlPattern).required()
       }
-    }
-  }
+   }
+ }
 }, {
   method: 'GET',
   path: '/',
   handler(request, reply) {
+    console.log('Rendering index page');
     reply.view('index');
   }
 }, {
